@@ -1,0 +1,36 @@
+﻿@model IEnumerable<User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h2>All Staff</h2>
+<a asp-action="AddStaff" class="btn btn-sm btn-primary">Add Staff</a>
+<a asp-action="GetStaff" class="btn btn-sm btn-secondary">Get Staff</a>
+<table class="table table-sm table-striped table-bordered m-2">
+    <thead><tr><th>ID</th><th>FirstName</th><th>LastName</th><th>Username</th><th>Update</th><th>Delete</th></tr></thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.Id</td>
+                <td>@r.FirstName</td>
+                <td>@r.LastName</td>
+                <td>@r.Username</td>
+                <td>
+                    <a asp-action="UpdateTodo" asp-route-id="@r.Id" class="btn btn-info">UPD</a>
+                </td>
+                <td>
+
+                    <form asp-action="DeleteStaff" asp-route-id="@r.Id" method="post">
+
+                        <input type="hidden" value="@r.Id" name="id" />
+                        <button type="submit" class="btn btn-danger">Del</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
